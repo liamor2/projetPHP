@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Liste des vaisseaux Star Citizen</title>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="./public/css/style.css">
+</head>
+<body>
+    <h1>Liste des vaisseaux Star Citizen</h1>
+    <ul>
+        {% for starship in starships %}
+            <li>{{ starship.starship_name }} - {{ starship.model_name }} - {{ starship.user_name }}</li>
+        {% endfor %}
+    </ul>
+</body>
+</html>

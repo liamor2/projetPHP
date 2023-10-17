@@ -1,19 +1,27 @@
 <?php
 
-require_once 'models/starshipModel.php';
-require_once 'controllers/starshipController.php';
+require_once 'vendor/autoload.php';
+require_once 'app/config.php';
+require_once 'app/controllers/StarshipController.php';
+require_once 'app/controllers/MiscController.php';
 
-$dbConnection = new mysqli('localhost', 'root', '', 'bddSC');
+route_request();
 
-if ($dbConnection->connect_errno) {
-    echo "Failed to connect to MySQL: " . $dbConnection->connect_error;
-    exit();
+
+function route_request(){
+    $controller = $_GET['controller'] ?? 'misc';
+    $action = $_GET['action'] ?? 'home';
+
+    switch($controller){
+        case 'starships':
+            StarshipController::$action();
+            break;
+        case 'misc':
+            MiscController::$action();
+            break;
+        default:
+            MiscController::notFound();
+    }
 }
-
-$starshipModel = new StarshipModel($dbConnection);
-
-$starshipController = new StarshipController($starshipModel);
-
-$starshipController->listStarship();
 
 ?>
