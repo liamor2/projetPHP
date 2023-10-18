@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>Se connecter</title>
+    <link rel="stylesheet" href="./public/css/style.css">
+</head>
+<body>
+    <h1>Login</h1>
+    <form action="index.php?controller=users&action=authenticate" method="post">
+        <label for="email">Email</label>
+        <input type="email" name="email" id="email" required>
+        <label for="password">Mot de passe</label>
+        <input type="password" name="password" id="password" required>
+        <label for="confirm_password">Confirmer le mot de passe</label>
+        <input type="password" name="confirm_password" id="confirm_password" required>
+        <input type="submit" value="Se connecter">
+    </form>
+    <p>Pas encore de compte ? <a href="index.php?controller=users&action=register">S'inscrire</a></p>
+</body>
+</html>

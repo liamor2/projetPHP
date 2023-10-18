@@ -16,7 +16,8 @@ try {
 function createTwigEnvironment(){
     $loader = new \Twig\Loader\FilesystemLoader(__DIR__ . '\views');
     $twig = new \Twig\Environment($loader, [
-        'cache' => false
+        'cache' => false,
+        'debug' => true
     ]);
     return $twig;
 }

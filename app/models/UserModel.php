@@ -1,9 +1,9 @@
 <?php
 
-class UserMode {
+class UserModel {
     public static function getByEmail($email) {
         global $bdd;
-        $req = $bdd->prepare('SELECT * FROM users WHERE email = :email');
+        $req = $bdd->prepare('SELECT * FROM users WHERE user_email = :email');
         $req->execute(array(
             'email' => $email
         ));
@@ -13,7 +13,7 @@ class UserMode {
 
     public static function getByEmailAndPassword($email, $password) {
         global $bdd;
-        $req = $bdd->prepare('SELECT * FROM users WHERE email = :email AND password = :password');
+        $req = $bdd->prepare('SELECT * FROM users WHERE user_email = :email AND user_password = :password');
         $req->execute(array(
             'email' => $email,
             'password' => $password
@@ -24,7 +24,7 @@ class UserMode {
 
     public static function create($name, $email, $password) {
         global $bdd;
-        $req = $bdd->prepare('INSERT INTO users (name, email, password, role) VALUES (:name, :email, :password, :role)');
+        $req = $bdd->prepare('INSERT INTO users (user_name, user_email, user_password, user_role) VALUES (:name, :email, :password, :role)');
         $req->execute(array(
             'name' => $name,
             'email' => $email,
@@ -37,7 +37,7 @@ class UserMode {
 
     public static function update($id, $name, $email, $password) {
         global $bdd;
-        $req = $bdd->prepare('UPDATE users SET name = :name, email = :email, password = :password WHERE id = :id');
+        $req = $bdd->prepare('UPDATE users SET user_name = :name, user_email = :email, user_password = :password WHERE user_id = :id');
         $req->execute(array(
             'id' => $id,
             'name' => $name,
@@ -50,7 +50,7 @@ class UserMode {
 
     public static function delete($id) {
         global $bdd;
-        $req = $bdd->prepare('DELETE FROM users WHERE id = :id');
+        $req = $bdd->prepare('DELETE FROM users WHERE user_id = :id');
         $req->execute(array(
             'id' => $id
         ));
@@ -64,6 +64,16 @@ class UserMode {
         $req->execute();
         $users = $req->fetchAll();
         return $users;
+    }
+
+    public static function getById($id) {
+        global $bdd;
+        $req = $bdd->prepare('SELECT * FROM users WHERE user_id = :id');
+        $req->execute(array(
+            'id' => $id
+        ));
+        $user = $req->fetch();
+        return $user;
     }
 }
 

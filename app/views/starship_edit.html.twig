@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Modifier vaisseau - {{ starship.starship_name }}</title>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="./public/css/style.css">
+</head>
+<body>
+    <h1>{{ starship.starship_name }}</h1>
+    <form action="index.php?controller=starships&action=update" method="post">
+        <table>
+            <tr>
+                <th></th>
+                <th>Propriétaire</th>
+                <th>Nom</th>
+                <th>Modèle</th>
+            </tr>
+            <tr>
+                <td>Actuellement</td>
+                <td>{{ starship.user_name }}</td>
+                <td>{{ starship.starship_name }}</td>
+                <td>{{ starship.model_name }}</td>
+            </tr>
+            <tr>
+                <td>Modifier</td>
+                <td>
+                    <select name="user_id" id="user_id">
+                        {% for user in users %}
+                            <option value="{{ user.user_id }}">{{ user.user_name }}</option>
+                        {% endfor %}
+                    </select>
+                </td>
+                    <td>
+                        <input type="text" name="starship_name" id="starship_name" value="{{ starship.starship_name }}">
+                        <input type="hidden" name="starship_id" id="starship_id" value="{{ starship.starship_id }}">
+                    </td>
+                <td>
+                    <select name="model_id" id="model_id">
+                        {% for model in models %}
+                            <option value="{{ model.model_id }}">{{ model.model_name }}</option>
+                        {% endfor %}
+                    </select>
+                </td>
+            </tr>
+        </table>
+        <input type="submit" value="Modifier">
+    </form>
+    <a href="index.php?controller=starships&action=index">Retour</a>
+</html>

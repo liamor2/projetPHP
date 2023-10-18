@@ -3,7 +3,7 @@
 class StarshipModel {
     public static function getAll() {
         global $bdd;
-        $req = $bdd->prepare('SELECT * FROM starship');
+        $req = $bdd->prepare('SELECT * FROM starships');
         $req->execute();
         $starships = $req->fetchAll();
         return $starships;
@@ -11,7 +11,7 @@ class StarshipModel {
 
     public static function getById($id) {
         global $bdd;
-        $req = $bdd->prepare('SELECT * FROM starship WHERE starship_id = :id');
+        $req = $bdd->prepare('SELECT * FROM starships WHERE starship_id = :id');
         $req->execute(array(
             'id' => $id
         ));
@@ -21,7 +21,7 @@ class StarshipModel {
 
     public static function create($model, $name, $owner) {
         global $bdd;
-        $req = $bdd->prepare('INSERT INTO starship (starship_model, starship_name, starship_owner) VALUES (:model, :name, :owner)');
+        $req = $bdd->prepare('INSERT INTO starships (starship_model, starship_name, starship_owner) VALUES (:model, :name, :owner)');
         $req->execute(array(
             'model' => $model,
             'name' => $name,
@@ -33,7 +33,7 @@ class StarshipModel {
 
     public static function update($id, $model, $name, $owner) {
         global $bdd;
-        $req = $bdd->prepare('UPDATE starship SET starship_model = :model, starship_name = :name, starship_owner = :owner WHERE starship_id = :id');
+        $req = $bdd->prepare('UPDATE starships SET starship_model = :model, starship_name = :name, starship_owner = :owner WHERE starship_id = :id');
         $req->execute(array(
             'id' => $id,
             'model' => $model,
@@ -46,7 +46,7 @@ class StarshipModel {
 
     public static function delete($id) {
         global $bdd;
-        $req = $bdd->prepare('DELETE FROM starship WHERE starship_id = :id');
+        $req = $bdd->prepare('DELETE FROM starships WHERE starship_id = :id');
         $req->execute(array(
             'id' => $id
         ));
@@ -56,7 +56,7 @@ class StarshipModel {
 
     public static function getAllByUser($userId) {
         global $bdd;
-        $req = $bdd->prepare('SELECT * FROM starship WHERE starship_owner = :owner');
+        $req = $bdd->prepare('SELECT * FROM starships WHERE starship_owner = :owner');
         $req->execute(array(
             'owner' => $userId
         ));
@@ -66,7 +66,7 @@ class StarshipModel {
 
     public static function getJoinModel($id) {
         global $bdd;
-        $req = $bdd->prepare('SELECT * FROM starship INNER JOIN model ON starship.starship_model = model.model_id WHERE starship.starship_id = :id');
+        $req = $bdd->prepare('SELECT * FROM starships INNER JOIN models ON starships.starship_model = models.model_id WHERE starships.starship_id = :id');
         $req->execute(array(
             'id' => $id
         ));
@@ -76,7 +76,7 @@ class StarshipModel {
 
     public static function getJoinUser($id) {
         global $bdd;
-        $req = $bdd->prepare('SELECT * FROM starship INNER JOIN user ON starship.starship_owner = user.user_id WHERE starship.starship_id = :id');
+        $req = $bdd->prepare('SELECT * FROM starships INNER JOIN users ON starships.starship_owner = users.user_id WHERE starships.starship_id = :id');
         $req->execute(array(
             'id' => $id
         ));
@@ -86,7 +86,17 @@ class StarshipModel {
 
     public static function getJoinModelUser($id) {
         global $bdd;
-        $req = $bdd->prepare('SELECT * FROM starship INNER JOIN model ON starship.starship_model = model.model_id INNER JOIN user ON starship.starship_owner = user.user_id WHERE starship.starship_id = :id');
+        $req = $bdd->prepare('SELECT * FROM starships INNER JOIN models ON starships.starship_model = models.model_id INNER JOIN users ON starships.starship_owner = users.user_id WHERE starships.starship_id = :id');
+        $req->execute(array(
+            'id' => $id
+        ));
+        $starship = $req->fetch();
+        return $starship;
+    }
+
+    public static function getJoinModelUserSpecies($id) {
+        global $bdd;
+        $req = $bdd->prepare('SELECT * FROM starships INNER JOIN models ON starships.starship_model = models.model_id INNER JOIN users ON starships.starship_owner = users.user_id INNER JOIN species ON models.model_species = species.species_id WHERE starships.starship_id = :id');
         $req->execute(array(
             'id' => $id
         ));
@@ -96,7 +106,7 @@ class StarshipModel {
 
     public static function getAllJoinModel() {
         global $bdd;
-        $req = $bdd->prepare('SELECT * FROM starship INNER JOIN model ON starship.starship_model = model.model_id');
+        $req = $bdd->prepare('SELECT * FROM starships INNER JOIN models ON starships.starship_model = models.model_id');
         $req->execute();
         $starships = $req->fetchAll();
         return $starships;
@@ -104,7 +114,7 @@ class StarshipModel {
 
     public static function getAllJoinUser() {
         global $bdd;
-        $req = $bdd->prepare('SELECT * FROM starship INNER JOIN user ON starship.starship_owner = user.user_id');
+        $req = $bdd->prepare('SELECT * FROM starships INNER JOIN users ON starships.starship_owner = users.user_id');
         $req->execute();
         $starships = $req->fetchAll();
         return $starships;
@@ -112,7 +122,7 @@ class StarshipModel {
 
     public static function getAllJoinModelUser() {
         global $bdd;
-        $req = $bdd->prepare('SELECT * FROM starship INNER JOIN model ON starship.starship_model = model.model_id INNER JOIN user ON starship.starship_owner = user.user_id');
+        $req = $bdd->prepare('SELECT * FROM starships INNER JOIN models ON starships.starship_model = models.model_id INNER JOIN users ON starships.starship_owner = users.user_id');
         $req->execute();
         $starships = $req->fetchAll();
         return $starships;

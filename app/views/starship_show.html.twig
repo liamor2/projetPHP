@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Vaisseau - {{ starship.starship_name }}</title>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="./public/css/style.css">
+</head>
+<body>
+    <h1>{{ starship.starship_name }}</h1>
+    <table>
+        <tr>
+            <th>Propriétaire</th>
+            <th>Nom</th>
+            <th>Modèle</th>
+            <th>Fabriquant</th>
+            <th>Espèce affiliée</th>
+            <th>Longueur</th>
+            <th>Largeur</th>
+            <th>Hauteur</th>
+            <th>Equipage Minimum</th>
+            <th>Equipage Maximum</th>
+            <th>Classe de vaisseau</th>
+        </tr>
+        <tr>
+            <td>{{ starship.user_name }}</td>
+            <td>{{ starship.starship_name }}</td>
+            <td>{{ starship.model_name }}</td>
+            <td>{{ starship.model_manufacturer }}</td>
+            <td>{{ starship.species_name }}</td>
+            <td>{{ starship.model_length }}</td>
+            <td>{{ starship.model_width }}</td>
+            <td>{{ starship.model_height }}</td>
+            <td>{{ starship.model_minCrew }}</td>
+            <td>{{ starship.model_maxCrew }}</td>
+            <td>{{ starship.model_starship_class }}</td>
+        </tr>
+    </table>
+    <a href="index.php?controller=starships&action=index">Retour</a>
+</html>

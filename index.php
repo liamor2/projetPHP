@@ -3,6 +3,7 @@
 require_once 'vendor/autoload.php';
 require_once 'app/config.php';
 require_once 'app/controllers/StarshipController.php';
+require_once 'app/controllers/UserController.php';
 require_once 'app/controllers/MiscController.php';
 
 route_request();
@@ -15,6 +16,9 @@ function route_request(){
     switch($controller){
         case 'starships':
             StarshipController::$action();
+            break;
+        case 'users':
+            UserController::$action();
             break;
         case 'misc':
             MiscController::$action();

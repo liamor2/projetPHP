@@ -1,13 +1,13 @@
 -- MariaDB 10.4.28 database script dump file for bddSC
 
 
-
+DROP DATABASE IF EXISTS `bddSC`;
 CREATE DATABASE IF NOT EXISTS `bddSC`;
 
 USE `bddSC`;
 
--- Table structure for table `user`
-CREATE TABLE IF NOT EXISTS `user` (
+-- Table structure for table `users`
+CREATE TABLE IF NOT EXISTS `users` (
   `user_id` int(11) NOT NULL AUTO_INCREMENT,
   `user_name` varchar(45) NOT NULL,
   `user_email` varchar(45) NOT NULL,
@@ -25,8 +25,8 @@ CREATE TABLE IF NOT EXISTS `species` (
   UNIQUE KEY `name_UNIQUE` (`species_name`)
 );
 
--- Table structure for table `model`
-CREATE TABLE IF NOT EXISTS `model` (
+-- Table structure for table `models`
+CREATE TABLE IF NOT EXISTS `models` (
   `model_id` int(11) NOT NULL AUTO_INCREMENT,
   `model_name` varchar(45) NOT NULL,
   `model_manufacturer` varchar(45) NOT NULL,
@@ -43,8 +43,8 @@ CREATE TABLE IF NOT EXISTS `model` (
   CONSTRAINT `model_species` FOREIGN KEY (`model_species`) REFERENCES `species` (`species_id`) ON DELETE NO ACTION ON UPDATE NO ACTION
 );
 
--- Table structure for table `starship`
-CREATE TABLE IF NOT EXISTS `starship` (
+-- Table structure for table `starships`
+CREATE TABLE IF NOT EXISTS `starships` (
   `starship_id` int(11) NOT NULL AUTO_INCREMENT,
   `starship_model` int(11) NOT NULL,
   `starship_name` varchar(45) NOT NULL,
@@ -52,12 +52,12 @@ CREATE TABLE IF NOT EXISTS `starship` (
   PRIMARY KEY (`starship_id`),
   KEY `starship_model_idx` (`starship_model`),
   KEY `starship_owner_idx` (`starship_owner`),
-  CONSTRAINT `starship_model` FOREIGN KEY (`starship_model`) REFERENCES `model` (`model_id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  CONSTRAINT `starship_owner` FOREIGN KEY (`starship_owner`) REFERENCES `user` (`user_id`) ON DELETE NO ACTION ON UPDATE NO ACTION
+  CONSTRAINT `starship_model` FOREIGN KEY (`starship_model`) REFERENCES `models` (`model_id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  CONSTRAINT `starship_owner` FOREIGN KEY (`starship_owner`) REFERENCES `users` (`user_id`) ON DELETE NO ACTION ON UPDATE NO ACTION
 );
 
--- Table structure for table `armament`
-CREATE TABLE IF NOT EXISTS `armament` (
+-- Table structure for table `armaments`
+CREATE TABLE IF NOT EXISTS `armaments` (
   `armament_id` int(11) NOT NULL AUTO_INCREMENT,
   `armament_name` varchar(45) NOT NULL,
   `armament_manufacturer` varchar(45) NOT NULL,
@@ -72,12 +72,12 @@ CREATE TABLE IF NOT EXISTS `starship_has_armament` (
   `id_armament` int(11) NOT NULL,
     KEY `starship_has_armament_armament_idx` (`id_armament`),
     KEY `starship_has_armament_starship_idx` (`id_starship`),
-    CONSTRAINT `starship_has_armament_armament` FOREIGN KEY (`id_armament`) REFERENCES `armament` (`armament_id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-    CONSTRAINT `starship_has_armament_starship` FOREIGN KEY (`id_starship`) REFERENCES `starship` (`starship_id`) ON DELETE NO ACTION ON UPDATE NO ACTION
+    CONSTRAINT `starship_has_armament_armament` FOREIGN KEY (`id_armament`) REFERENCES `armaments` (`armament_id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+    CONSTRAINT `starship_has_armament_starship` FOREIGN KEY (`id_starship`) REFERENCES `starships` (`starship_id`) ON DELETE NO ACTION ON UPDATE NO ACTION
 );
 
--- Add data to table `user`
-INSERT INTO `user` (`user_id`, `user_name`, `user_email`, `user_password`, `user_role`) VALUES
+-- Add data to table `users`
+INSERT INTO `users` (`user_id`, `user_name`, `user_email`, `user_password`, `user_role`) VALUES
 (1, 'admin', 'admin@sc.net', 'admin', 'admin'),
 (2, 'user1', 'user1@sc.net', 'user1', 'user'),
 (3, 'user2', 'user2@sc.net', 'user2', 'user');
@@ -100,8 +100,8 @@ INSERT INTO `species` (`species_id`, `species_name`) VALUES
 (7, 'Hadesians');
 
 
---  Add data to table `model`
-INSERT INTO `model` (`model_id`, `model_name`, `model_manufacturer`, `model_species`, `model_length`, `model_width`, `model_height`, `model_minCrew`, `model_maxCrew`, `model_cargo_capacity`, `model_starship_class`) VALUES
+--  Add data to table `models`
+INSERT INTO `models` (`model_id`, `model_name`, `model_manufacturer`, `model_species`, `model_length`, `model_width`, `model_height`, `model_minCrew`, `model_maxCrew`, `model_cargo_capacity`, `model_starship_class`) VALUES
 
 (1, 'ORIG 100i', 'Origin Jumpworks GmbH', 1, 15.00, 10.00, 4.00, 1, 1, 2, 'Touring'),
 
@@ -161,8 +161,8 @@ INSERT INTO `model` (`model_id`, `model_name`, `model_manufacturer`, `model_spec
 
 (29, 'ESRA Glaive', 'Esperia Inc.', 5, 30.00, 20.00, 10.00, 1, 1, 0, 'Medium Fighter');
 
--- Add data to table `starship` 15 row
-INSERT INTO `starship` (`starship_id`, `starship_model`, `starship_name`, `starship_owner`) VALUES
+-- Add data to table `starships` 15 row
+INSERT INTO `starships` (`starship_id`, `starship_model`, `starship_name`, `starship_owner`) VALUES
 (1, 1, 'Interpid', 2),
 (2, 2, 'Vulture', 2),
 (3, 3, 'Hari Seldon', 2),
@@ -179,8 +179,8 @@ INSERT INTO `starship` (`starship_id`, `starship_model`, `starship_name`, `stars
 (14, 19, 'SRV', 3),
 (15, 25, 'Cargo', 3);
 
--- Add data to table `armament` 10 row
-INSERT INTO `armament` (`armament_id`, `armament_name`, `armament_manufacturer`, `armament_type`, `armament_size`) VALUES
+-- Add data to table `armaments` 10 row
+INSERT INTO `armaments` (`armament_id`, `armament_name`, `armament_manufacturer`, `armament_type`, `armament_size`) VALUES
 (1, 'M4A Laser Cannon', 'Behring', 'Laser Cannon', 'S1'),
 (2, 'M3A Laser Cannon', 'Behring', 'Laser Cannon', 'S2'),
 (3, 'M6A Laser Cannon', 'Behring', 'Laser Cannon', 'S3'),

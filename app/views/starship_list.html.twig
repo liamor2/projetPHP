@@ -9,8 +9,26 @@
     <h1>Liste des vaisseaux Star Citizen</h1>
     <ul>
         {% for starship in starships %}
-            <li>{{ starship.starship_name }} - {{ starship.model_name }} - {{ starship.user_name }}</li>
+            <li>{{ starship.starship_name }} - {{ starship.model_name }} - {{ starship.user_name }} - <a href="index.php?controller=starships&action=show&starship_id={{ starship.starship_id }}">Voir ce vaisseau</a> - <a href="index.php?controller=starships&action=edit&starship_id={{ starship.starship_id }}">Modifier</a> - <a href="index.php?controller=starships&action=delete&starship_id={{ starship.starship_id }}">Supprimer</a></li>
         {% endfor %}
     </ul>
+    <form action="index.php?controller=starships&action=add" method="post">
+        <label for="starship_name">Nom du vaisseau</label>
+        <input type="text" name="starship_name" id="starship_name" required>
+        <label for="model_id">Modèle</label>
+        <select name="model_id" id="model_id" required>
+            {% for model in models %}
+                <option value="{{ model.model_id }}">{{ model.model_name }}</option>
+            {% endfor %}
+        </select>
+        <label for="user_id">Propriétaire</label>
+        <select name="user_id" id="user_id" required>
+            {% for user in users %}
+                <option value="{{ user.user_id }}">{{ user.user_name }}</option>
+            {% endfor %}
+        </select>
+        <input type="submit" value="Ajouter">
+    </form>
+    <a href="index.php">Retour à l'accueil</a>
 </body>
 </html>
