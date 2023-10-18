@@ -56,26 +56,6 @@ CREATE TABLE IF NOT EXISTS `starships` (
   CONSTRAINT `starship_owner` FOREIGN KEY (`starship_owner`) REFERENCES `users` (`user_id`) ON DELETE NO ACTION ON UPDATE NO ACTION
 );
 
--- Table structure for table `armaments`
-CREATE TABLE IF NOT EXISTS `armaments` (
-  `armament_id` int(11) NOT NULL AUTO_INCREMENT,
-  `armament_name` varchar(45) NOT NULL,
-  `armament_manufacturer` varchar(45) NOT NULL,
-  `armament_type` varchar(45) NOT NULL,
-  `armament_size` varchar(45) NOT NULL,
-  PRIMARY KEY (`armament_id`)
-);
-
--- Table structure for table `starship_has_armament`
-CREATE TABLE IF NOT EXISTS `starship_has_armament` (
-  `id_starship` int(11) NOT NULL,
-  `id_armament` int(11) NOT NULL,
-    KEY `starship_has_armament_armament_idx` (`id_armament`),
-    KEY `starship_has_armament_starship_idx` (`id_starship`),
-    CONSTRAINT `starship_has_armament_armament` FOREIGN KEY (`id_armament`) REFERENCES `armaments` (`armament_id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-    CONSTRAINT `starship_has_armament_starship` FOREIGN KEY (`id_starship`) REFERENCES `starships` (`starship_id`) ON DELETE NO ACTION ON UPDATE NO ACTION
-);
-
 -- Add data to table `users`
 INSERT INTO `users` (`user_id`, `user_name`, `user_email`, `user_password`, `user_role`) VALUES
 (1, 'admin', 'admin@sc.net', 'admin', 'admin'),
@@ -178,41 +158,3 @@ INSERT INTO `starships` (`starship_id`, `starship_model`, `starship_name`, `star
 (13, 15, 'Mole', 3),
 (14, 19, 'SRV', 3),
 (15, 25, 'Cargo', 3);
-
--- Add data to table `armaments` 10 row
-INSERT INTO `armaments` (`armament_id`, `armament_name`, `armament_manufacturer`, `armament_type`, `armament_size`) VALUES
-(1, 'M4A Laser Cannon', 'Behring', 'Laser Cannon', 'S1'),
-(2, 'M3A Laser Cannon', 'Behring', 'Laser Cannon', 'S2'),
-(3, 'M6A Laser Cannon', 'Behring', 'Laser Cannon', 'S3'),
-(4, 'Dominator II', 'Talon Weapon System', 'Missiles', 'S1'),
-(5, 'Dominator III', 'Talon Weapon System', 'Missiles', 'S2'),
-(6, 'Dominator IV', 'Talon Weapon System', 'Missiles', 'S3'),
-(7, 'Ignite', 'Firestorm Kinetics', 'Ballistic Cannon', 'S1'),
-(8, 'Scattergun', 'Behring', 'Ballistic Cannon', 'S2'),
-(9, 'Mantis GT-220', 'Klaus & Werner', 'Ballistic Cannon', 'S3'),
-(10, 'Mantis GT-220', 'Klaus & Werner', 'Ballistic Cannon', 'S3');
-
--- Add data to table `starship_has_armament` create armament for all starship
-INSERT INTO `starship_has_armament` (`id_starship`, `id_armament`) VALUES
-(1, 1),
-(1, 1),
-(1, 1),
-(1, 1),
-(1, 1),
-(1, 1),
-(1, 1),
-(1, 1),
-(1, 5),
-(2, 2),
-(2, 2),
-(2, 2),
-(2, 6),
-(2, 6),
-(3, 3),
-(3, 3),
-(3, 3),
-(3, 3),
-(3, 3),
-(3, 3),
-(3, 3),
-(3, 3);

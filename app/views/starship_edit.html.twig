@@ -26,7 +26,12 @@
                 <td>
                     <select name="user_id" id="user_id">
                         {% for user in users %}
-                            <option value="{{ user.user_id }}">{{ user.user_name }}</option>
+                            {% if user.user_id == starship.user_id %}
+                                <option value="{{ user.user_id }}" selected>{{ user.user_name }}</option>
+                            {% endif %}
+                            {% if user.user_id != starship.user_id %}
+                                <option value="{{ user.user_id }}">{{ user.user_name }}</option>
+                            {% endif %}
                         {% endfor %}
                     </select>
                 </td>
@@ -37,7 +42,12 @@
                 <td>
                     <select name="model_id" id="model_id">
                         {% for model in models %}
-                            <option value="{{ model.model_id }}">{{ model.model_name }}</option>
+                            {% if model.model_id == starship.model_id %}
+                                <option value="{{ model.model_id }}" selected>{{ model.model_name }}</option>
+                            {% endif %}
+                            {% if model.model_id != starship.model_id %}
+                                <option value="{{ model.model_id }}">{{ model.model_name }}</option>
+                            {% endif %}
                         {% endfor %}
                     </select>
                 </td>

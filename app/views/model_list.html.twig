@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Liste des models de vaisseaux Star Citizen</title>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="./public/css/style.css">
+</head>
+<body>
+    <h1>Liste des models de vaisseaux Star Citizen</h1>
+    <ul>
+        {% for model in models %}
+            <li><a href="index.php?controller=models&action=model&id={{ model.model_id }}">{{ model.model_name }}</a>    -    <a href="index.php?controller=models&action=delete&id={{ model.model_id }}">X</a></li>
+        {% endfor %}
+    </ul>
+    <a href="index.php">Retour à l'accueil</a>
+</body>
+</html>

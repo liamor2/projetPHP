@@ -5,6 +5,8 @@ require_once 'app/config.php';
 require_once 'app/controllers/StarshipController.php';
 require_once 'app/controllers/UserController.php';
 require_once 'app/controllers/MiscController.php';
+require_once 'app/controllers/ModelController.php';
+require_once 'app/controllers/SpeciesController.php';
 
 if (session_status() == PHP_SESSION_NONE) {
     session_start();
@@ -26,6 +28,12 @@ function route_request(){
             break;
         case 'misc':
             MiscController::$action();
+            break;
+        case 'models':
+            ModelController::$action();
+            break;
+        case 'species':
+            SpeciesController::$action();
             break;
         default:
             MiscController::notFound();

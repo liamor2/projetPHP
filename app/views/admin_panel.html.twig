@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>Panneau de contrôle Admoin</title>
+    <link rel="stylesheet" href="./public/css/style.css">
+</head>
+<body>
+    <h1>Panneau de contrôle Admin</h1>
+    <table>
+        <tr>
+            <th>Nom</th>
+            <th>Email</th>
+            <th>Role</th>
+            <th colspan="3">Actions</th>
+        </tr>
+        {% for user in users %}
+            <tr>
+                <td>{{ user.user_name }}</td>
+                <td>{{ user.user_email }}</td>
+                <td>{{ user.user_role }}</td>
+                <td><a href="index.php?controller=users&action=edit&id={{ user.user_id }}">Modifier</a></td>
+                <td><a href="index.php?controller=users&action=delete&id={{ user.user_id }}">Supprimer</a></td>
+                <td><a href="index.php?controller=users&action=show&id={{ user.user_id }}">Voir</a></td>
+            </tr>
+        {% endfor %}
+    </table>
+</body>

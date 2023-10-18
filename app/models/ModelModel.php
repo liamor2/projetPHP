@@ -12,7 +12,7 @@ class ModelModel {
     
         public static function getById($id) {
             global $bdd;
-            $req = $bdd->prepare('SELECT * FROM models WHERE id = :id');
+            $req = $bdd->prepare('SELECT * FROM models WHERE model_id = :id');
             $req->execute(array(
                 'id' => $id
             ));
@@ -41,7 +41,7 @@ class ModelModel {
     
         public static function update($id, $name, $manufacturer, $species, $length, $width, $height, $minCrew, $maxCrew, $cargo_capacity, $starship_class) {
             global $bdd;
-            $req = $bdd->prepare('UPDATE models SET model_name = :name, model_manufacturer = :manufacturer, model_species = :species, model_length = :length, model_width = :width, model_height = :height, model_minCrew = :minCrew, model_maxCrew = :maxCrew, model_cargo_capacity = :cargo_capacity, model_starship_class = :starship_class WHERE id = :id');
+            $req = $bdd->prepare('UPDATE models SET model_name = :name, model_manufacturer = :manufacturer, model_species = :species, model_length = :length, model_width = :width, model_height = :height, model_minCrew = :minCrew, model_maxCrew = :maxCrew, model_cargo_capacity = :cargo_capacity, model_starship_class = :starship_class WHERE model_id = :id');
             $req->execute(array(
                 'id' => $id,
                 'name' => $name,
@@ -61,7 +61,7 @@ class ModelModel {
     
         public static function delete($id) {
             global $bdd;
-            $req = $bdd->prepare('DELETE FROM models WHERE id = :id');
+            $req = $bdd->prepare('DELETE FROM models WHERE model_id = :id');
             $req->execute(array(
                 'id' => $id
             ));

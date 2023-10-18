@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Présentation du model : {{ model.model_name }}</title>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="./public/css/style.css">
+</head>
+<body>
+    <h1>Présentation du model : {{ model.model_name }}</h1>
+    <p>Voici les informations du model : </p>
+    <table>
+        <tr>
+            <td>Nom</td>
+            <td>{{ model.model_name }}</td>
+        </tr>
+        <tr>
+            <td>Manufacturer</td>
+            <td>{{ model.model_manufacturer }}</td>
+        </tr>
+        <tr>
+            <td>Longueur</td>
+            <td>{{ model.model_length }}</td>
+        </tr>
+        <tr>
+            <td>Largeur</td>
+            <td>{{ model.model_width }}</td>
+        </tr>
+        <tr>
+            <td>Hauteur</td>
+            <td>{{ model.model_height }}</td>
+        </tr>
+        <tr>
+            <td>Equipage Minimum</td>
+            <td>{{ model.model_minCrew }}</td>
+        </tr>
+        <tr>
+            <td>Equipage Maximum</td>
+            <td>{{ model.model_maxCrew }}</td>
+        </tr>
+        <tr>
+            <td>Capacité de stockage</td>
+            <td>{{ model.model_cargo_capacity }} SCU</td>
+        </tr>
+        <tr>
+            <td>Classe de Vaisseau</td>
+            <td>{{ model.model_starship_class }}</td>
+        </tr>
+        <tr>
+            <td>Modifier le Model</td>
+            <td><a href="index.php?controller=models&action=edit&id={{ model.model_id }}">Modifier</a></td>
+    </table>
+    <a href="index.php?controller=models&action=index">Retour à la liste des models</a>
+</body>

@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Votre Profil</title>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="./public/css/style.css">
+</head>
+<body>
+    <h1>Votre Profil</h1>
+    <p>Bonjour {{ user.user_name }} !</p>
+    <p>Vous êtes connecté en tant que {{ user.user_role }}.</p>
+    <table>
+        <tr>
+            <th>Nom</th>
+            <th>Email</th>
+            <th>Role</th>
+        </tr>
+        <tr>
+            <td>{{ user.user_name }}</td>
+            <td>{{ user.user_email }}</td>
+            <td>{{ user.user_role }}</td>
+        </tr>
+    </table>
+    <h2>Vos vaisseaux</h2>
+    <table>
+        <tr>
+            <th>Nom</th>
+            <th>Modèle</th>
+            <th>Fabriquant</th>
+            <th>Espèce affiliée</th>
+            <th>Longueur</th>
+            <th>Largeur</th>
+            <th>Hauteur</th>
+            <th>Equipage Minimum</th>
+            <th>Equipage Maximum</th>
+            <th>Classe de vaisseau</th>
+        </tr>
+        {% for starship in starships %}
+        <tr>
+            <td>{{ starship.starship_name }}</td>
+            <td>{{ starship.model_name }}</td>
+            <td>{{ starship.model_manufacturer }}</td>
+            {% for species in species %}
+                {% if species.species_id == starship.model_species %}
+                    <td>{{ species.species_name }}</td>
+                {% endif %}
+            {% endfor %}
+            <td>{{ starship.model_length }}</td>
+            <td>{{ starship.model_width }}</td>
+            <td>{{ starship.model_height }}</td>
+            <td>{{ starship.model_minCrew }}</td>
+            <td>{{ starship.model_maxCrew }}</td>
+            <td>{{ starship.model_starship_class }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+    <h2>Modifier votre profil</h2>
+    <form action="index.php?action=updateUser" method="post">
+        <label for="user_name">Nom</label>
+        <input type="text" name="user_name" id="user_name" value="{{ user.user_name }}" required>
+        <label for="user_email">Email</label>
+        <input type="email" name="user_email" id="user_email" value="{{ user.user_email }}" required>
+        <label for="user_password">Mot de passe</label>
+        <input type="password" name="user_password" id="user_password" required>
+        <label for="user_password_confirm">Confirmer le mot de passe</label>
+        <input type="password" name="user_password_confirm" id="user_password_confirm" required>
+        <input type="submit" value="Modifier">
+    </form>
+    <a href="index.php">Retour à l'accueil</a>
+</body>
+</html>

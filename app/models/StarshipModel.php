@@ -56,7 +56,7 @@ class StarshipModel {
 
     public static function getAllByUser($userId) {
         global $bdd;
-        $req = $bdd->prepare('SELECT * FROM starships WHERE starship_owner = :owner');
+        $req = $bdd->prepare('SELECT * FROM starships INNER JOIN models ON starships.starship_model = models.model_id WHERE starships.starship_owner = :owner');
         $req->execute(array(
             'owner' => $userId
         ));

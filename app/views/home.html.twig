@@ -9,17 +9,28 @@
     <header>
         <h1>Star Citizen</h1>
         <nav>
-            <ul>
+            <ul class="nav">
                 <li><a href="index.php?controller=starships&action=index">Liste des vaisseaux</a></li>
+                <li><a href="index.php?controller=models&action=index">Liste des modèles</a></li>
+                <li><a href="index.php?controller=species&action=index">Liste des espèces</a></li>
                 {% if user %}
+                    <li><a href="index.php?controller=users&action=profil">Profil</a></li>
+                    {% if user.user_role == 'admin' %}
+                        <li><a href="index.php?controller=users&action=admin">Admin</a></li>
+                    {% endif %}
                     <li><a href="index.php?controller=users&action=logout">Déconnexion</a></li>
+                    <li>Bonjour {{ user.user_name }}</li>
                 {% else %}
                     <li><a href="index.php?controller=users&action=login">Connexion</a></li>
                     <li><a href="index.php?controller=users&action=register">Inscription</a></li>
                 {% endif %}
             </ul>
-            {# <p>Bonjour {{ user.username }}</p> #}
-            <p>{{dump(user)}}</p>
         </nav>
     </header>
+    <main>
+        <h2>Présentation de Star Citizen</h2>
+        <p> Star Citizen est un jeu vidéo massivement multijoueur de simulation spatiale du type science-fiction, en cours de développement, édité et développé par Cloud Imperium Games (CIG). Le jeu est en développement ouvert, c'est-à-dire que les joueurs peuvent y jouer dans sa phase alpha de développement. Il est principalement constitué d'un monde persistant massivement multijoueur (Persistent Universe ou PU).</p>
+        <br>
+        <p> Ce site à pour objectif de pouvoir intéragir avec la liste de vaisseaux de plusieurs utilisateur du jeu. Vous pourrez ainsi voir les vaisseaux de chaque utilisateur et les modèles du vaisseaux correspondant</p>
+    </main>
 </body>

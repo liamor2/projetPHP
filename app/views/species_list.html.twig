@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>Les espèces</title>
+    <link rel="stylesheet" href="./public/css/style.css">
+</head>
+<body>
+    <h1>Les espèces</h1>
+    <table>
+        <thead>
+            <tr>
+                <th>Nom</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for specie in species %}
+            <tr>
+                <td>{{ specie.species_name }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    <a href="index.php">Retour à l'accueil</a>
+</body>
+</html>

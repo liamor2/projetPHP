@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>S'inscrire</title>
+    <link rel="stylesheet" href="public/css/style.css">
+</head>
+<body>
+    <div class="container">
+        <h1>S'inscrire</h1>
+        <p>Retourner à la <a href="index.php">page d'accueil</a></p>
+        <form action="index.php?controller=users&action=create" method="post">
+            <input type="text" name="name" placeholder="Nom d'utilisateur">
+            <input type="email" name="email" placeholder="Adresse email">
+            <input type="password" name="password" placeholder="Mot de passe">
+            <input type="password" name="confirm_password" placeholder="Confirmer le mot de passe">
+            <button type="submit">S'inscrire</button>
+        </form>
+        {% if error %}
+            <p>{{ error }}</p>
+        {% endif %}
+        <a href="login.php">Se connecter</a>
+    </div>
+</body>
+</html>
