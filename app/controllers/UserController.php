@@ -71,38 +71,40 @@ class UserController {
     }
 
     public static function edit() {
-        $id = $_GET['user_id'];
+        $id = $_GET['id'];
+        $users = UserModel::getAll();
         $user = UserModel::getById($id);
         $twig = CreateTwigEnvironment();
 
-        echo $twig->render('user_edit.html.twig', [
-            'user' => $user
+        echo $twig->render('admin_panel.html.twig', [
+            'users' => $users,
+            'user' => $user,
+            'edit' => 'true'
         ]);
     }
 
     public static function update() {
-        $id = $_GET['user_id'];
-        $name = $_POST['name'];
-        $email = $_POST['email'];
-        $password = $_POST['password'];
-        $user = UserModel::update($id, $name, $email, $password);
+        $id = $_GET['id'];
+        $name = $_POST['user_name'];
+        $email = $_POST['user_email'];
+        $user = UserModel::update($id, $name, $email);
 
         if($user){
             $_SESSION['user'] = $user;
             header('Location: index.php?controller=misc&action=home');
         } else {
-            header('Location: index.php?controller=users&action=edit&user_id=' . $id);
+            header('Location: index.php?controller=users&action=edit&id=' . $id);
         }
     }
 
     public static function delete() {
-        $id = $_GET['user_id'];
+        $id = $_GET['id'];
         $user = UserModel::delete($id);
         header('Location: index.php?controller=misc&action=home');
     }
 
     public static function show() {
-        $id = $_GET['user_id'];
+        $id = $_GET['id'];
         $user = UserModel::getById($id);
         $twig = CreateTwigEnvironment();
 

@@ -21,8 +21,39 @@
                 <td>{{ user.user_role }}</td>
                 <td><a href="index.php?controller=users&action=edit&id={{ user.user_id }}">Modifier</a></td>
                 <td><a href="index.php?controller=users&action=delete&id={{ user.user_id }}">Supprimer</a></td>
-                <td><a href="index.php?controller=users&action=show&id={{ user.user_id }}">Voir</a></td>
+                {% if user.user_role == 'admin' %}
+                    <td><a href="index.php?controller=users&action=demote&id={{ user.user_id }}">Rétrograder</a></td>
+                {% endif %}
+                {% if user.user_role == 'user' %}
+                    <td><a href="index.php?controller=users&action=promote&id={{ user.user_id }}">Promouvoir</a></td>
+                {% endif %}
             </tr>
         {% endfor %}
+        {% if edit %}
+            <tr>
+                <th colspan="4">Modifier un utilisateur</th>
+            </tr>
+            <form action="index.php?controller=users&action=update&id={{ user.user_id }}" method="post">
+                <tr>
+                    <td><input type="text" name="user_name" value="{{ user.user_name }}"></td>
+                    <td><input type="text" name="user_email" value="{{ user.user_email }}"></td>
+                    <td><input type="text" name="user_role" value="{{ user.user_role }}"></td>
+                    <td><input type="submit" value="Modifier"></td>
+                </tr>
+            </form>
+        {% else %}
+            <tr>
+                <th colspan="4">Ajouter un utilisateur</th>
+            </tr>
+            <form action="index.php?controller=users&action=store" method="post">
+                <tr>
+                    <td><input type="text" name="user_name"></td>
+                    <td><input type="text" name="user_email"></td>
+                    <td><input type="text" name="user_role"></td>
+                    <td><input type="submit" value="Ajouter"></td>
+                </tr>
+            </form>
+        {% endif %}
     </table>
+    <a href="index.php">Retour à l'accueil</a>
 </body>

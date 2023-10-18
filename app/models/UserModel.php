@@ -35,14 +35,13 @@ class UserModel {
         return $user;
     }
 
-    public static function update($id, $name, $email, $password) {
+    public static function update($id, $name, $email) {
         global $bdd;
-        $req = $bdd->prepare('UPDATE users SET user_name = :name, user_email = :email, user_password = :password WHERE user_id = :id');
+        $req = $bdd->prepare('UPDATE users SET user_name = :name, user_email = :email WHERE user_id = :id');
         $req->execute(array(
             'id' => $id,
             'name' => $name,
-            'email' => $email,
-            'password' => $password
+            'email' => $email
         ));
         $user = $req->fetch();
         return $user;
