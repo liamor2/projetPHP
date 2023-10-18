@@ -6,6 +6,10 @@ require_once 'app/controllers/StarshipController.php';
 require_once 'app/controllers/UserController.php';
 require_once 'app/controllers/MiscController.php';
 
+if (session_status() == PHP_SESSION_NONE) {
+    session_start();
+}
+
 route_request();
 
 
